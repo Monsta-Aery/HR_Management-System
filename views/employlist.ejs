@@ -1,0 +1,283 @@
+
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DK HR Management System</title>
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <% if (email && email.length > 0) { %>
+                          <div class="alert alert-danger text-center" role="alert" id="email-error">
+                            <%= email %>
+                          </div>
+                          <script>
+                          setTimeout(function() {
+                            var email = document.getElementById('email-error');
+                            email.style.display = 'none';
+                          }, 5000); // hide the error after 5 seconds (5000 milliseconds)
+                          </script>
+                          <style>
+                          #email-error {
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            z-index: 9999;
+                          }
+                          </style>
+                          <% } %>
+
+
+
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container cont">
+          <input type="checkbox" name="" id="">
+          <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+          </div>
+          <ul class="menu-items">
+              <li><a href="employlist"><i class="fas fa-user"></i>&nbsp;&nbsp;Employee List</a></li>
+              <li><a href="employ"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add Employee</a></li>
+              <li><a href="/api/v1/login/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a></li>
+          </ul>
+
+          <div class="log">
+            <h2 class="logo">DK</h2></div>
+      </div>
+  </nav>
+  <section class="home">
+    <!--hero banner animation-->
+
+        <div class="wrapper">
+            <h1>First Digital Bank<br>
+            In Bhutan</h1>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <!--hero banner animation end-->
+            </div>
+  </section>
+  <section class="main"><div class="outer-wrapper">
+    <div class="table-wrapper">
+    <div class ="tablepadd">
+    <div class="table-heading">
+        <h4> List of employees</h4>
+    </div>
+    <style>
+      .custom-select {
+        width: 200px;
+        margin-right: 10px;
+      }
+      .search-button {
+        margin-left: 70px;
+      }
+    </style>
+
+    <div class="wrap mt-5">
+      <div class="row justify-content-center">
+        <form action="/api/v1/employlist" method="GET" class="d-flex align-items-center">
+          <div class="form-group input-box col-lg-4">
+            <select class="form-control input-1 text-center custom-select" id="gender" name="gender" required>
+              <option style="width: 150px;">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group input-box col-lg-4">
+            <button type="submit" class="search-button" style="background-color:#ff4f00; color: #fff; padding: 6px 12px; border-radius: 5px;">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+    <div class="table-div pt-4">
+        <table id="myTable" class="table  table-striped table-bordered">
+
+            <thead>
+                <tr>
+                    <th style="min-width:105px;">Name</th>
+                    <th>Employee ID</th>
+                    <th>Gender</th>
+                    <th>DOB</th>
+                    <th>Designation</th>
+                    <th>Department</th>
+                    <th>Appointment Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <% employs.forEach(function(employ, index) { %>
+          <tr>
+            <td><%= employ.name %></td>
+              <td><%= employ.eid %></td>
+              <td><%= employ.gender %></td>
+              <td><%= employ.date %></td>
+              <td><%= employ.designation %></td>
+              <td><%= employ.department %></td>
+              <td><%= employ.appointmentdate %></td>
+              <td class="text-center">
+                  <a data-bs-toggle="modal" data-bs-target="#edituser<%= index %>">
+                      <iconify-icon icon="bx:edit-alt"></iconify-icon>
+                  </a>
+                  <a data-bs-toggle="modal" data-bs-target="#deleteuser<%= employ.id %>">
+                      <iconify-icon icon="ph:trash"></iconify-icon>
+                  </a>
+              </td>
+          </tr>
+          <% }) %>
+            <tbody>
+                <!-- Table data goes here -->
+            </tbody>
+        </table>
+    </div>
+    <% employs.forEach(function(employ, index) { %>
+    <div class="modal fade " id="edituser<%= index %>" tabindex="-1" data-bs-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 ">
+                <h5 class="pt-4 text-center font-weight-bold" style="color: #ff4b13;">Add New Employee</h5>
+                <form class="pt-4 pb-4 pl-5 pr-5 justify-content-center" action="/api/v1/crud/<%= employ.id %>" method="post">
+                    <div class="form-group input-box">
+                        <label for="appointmentDate">Username</label>
+                        <input type="text" class="form-control input-1" placeholder="username" id="Enter Username"
+                            name="name" value="<%= employ.name %>" >
+                    </div>
+                    <div class="form-group  input-box">
+                        <label for="appointmentDate">EmployeeID</label>
+                        <input type="text" class="form-control input-1" id="employeeId" name="eid"
+                            placeholder="EmployeeID" value="<%= employ.eid %>" required>
+                    </div>
+                    <div class="form-group input-box">
+                        <label for="appointmentDate">Gender</label>
+                        <select class="form-control input-1" id="gender" name="gender" value="<%= employ.gender %>" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group input-box">
+                        <label for="dob">Birth Date</label>
+                        <input type="date" class="form-control input-1" id="dob" name="date" value="<%= employ.date %>" required>
+                    </div>
+                    <div class="form-group input-box">
+                        <label for="appointmentDate">Designation</label>
+                        <input type="text" class="form-control input-1" id="designation" name="designation" placeholder="Designation"
+                            name="designation" value="<%= employ.designation %>" required>
+                    </div>
+                    <div class="form-group input-box">
+                        <label for="appointmentDate">Department</label>
+                        <select class="form-control input-1" id="gender" name="department" value="<%= employ.department %>" required>
+                            <option value="">Choose Your Department</option>
+                            <option value="HR">HR</option>
+                            <option value="Manager">Manager</option>
+                            <option value="IT">IT</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group input-box">
+                        <label for="appointmentDate">Appointment Date</label>
+                        <input type="date" class="form-control input-1" id="appointmentDate" name="appointmentdate" value="<%= employ.appointmentdate %>"
+                            required>
+                    </div>
+                    <div class="actbtn">
+                      <div class="actionbtn">
+                         <button type="submit" class="btn btn-block no-border no-outline text-uppercase"
+                             style="background:#ff4b13; color:#fff;height:50px;">Update</button>
+                     </div>
+                     <div class="actionbtn">
+                         <button type="button" class="btn btn-block no-border no-outline text-uppercase"
+                             style="background:#ff4b13; color:#fff;height:50px;" data-bs-dismiss="modal">Cancel</button>
+                     </div>
+                   </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="deleteuser<%= employ.id %>" tabindex="-1" data-bs-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-5 text-center ">
+                <p class="pt-4 text-center font-weight-bold" style="color: #4f4f4f; font-size:18px;">
+                    Are you sure you want to delete this employee?</p>
+                <p style="font-size:14px; font-weight:regular">Action can not be undone once deleted!</p>
+
+                        <div class="actbtn">
+                        <div class="actionbtn">
+
+                <form id="deleteForm" method="POST" action="/api/v1/crud/<%= employ.id %>/delete">
+                     <input type="hidden" name="_method">
+                     <button type="submit" class="btn btn-danger">Delete</button>
+                 </form>
+                        </div>
+                        <div class="actionbtn">
+                            <button type="button" class="btn btn-block no-border no-outline text-uppercase"
+                                style="background:#ff4b13; color:#fff;height:50px;" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+
+                  </div>
+
+
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div></div></div>
+
+</section>
+  </body>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          $('#myTable').DataTable({
+              // Enable filtering
+              searching: true,
+              // Enable sorting
+              ordering: true,
+              // Enable pagination
+              paging: true
+          });
+      });
+  </script>
+</html>

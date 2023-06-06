@@ -1,0 +1,124 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DK</title>
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <% if (login && login.length > 0) { %>
+  <div class="alert alert-danger text-center" role="alert" id="login-error">
+    <span style="color: red;"><%= login %></span>
+  </div>
+  <script>
+    setTimeout(function() {
+      var login = document.getElementById('login-error');
+      login.style.display = 'none';
+    }, 3000); // hide the error after 5 seconds (5000 milliseconds)
+  </script>
+  <style>
+    #login-error {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+  </style>
+<% } %>
+
+
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container container">
+          <input type="checkbox" name="" id="">
+          <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+          </div>
+          <ul class="menu-items">
+              <li><a href="#home"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+              <li><a href="#about"><i class="fas fa-wrench"></i>&nbsp;&nbsp;Services</a></li>
+              <li><a href="#"><button class="button" id="form-open">Login</button></a></li>
+          </ul>
+          <div class="log">
+          <h2 class="logo">DK</h2></div>
+      </div>
+  </nav>
+
+
+    <!-- Home -->
+    <section class="home">
+      <div class="wrapper">
+      <div class="center">
+        <div class="sub_title">BHUTANESE</div>
+        <div class="title">First Digital Bank</div>
+        <div class="btns">
+          <button>Learn More</button>
+          <button>Earn More</button>
+        </div>
+      </div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="form_container">
+        <i class="uil uil-times form_close"></i>
+        <!-- Login From -->
+        <div class="form login_form">
+          <form action="/api/v1/login" method="post">
+            <h2>Login</h2>
+
+            <div class="input_box">
+              <input type="email" name="username" placeholder="Enter your email" required />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" name="password" placeholder="Enter your password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <div class="option_field">
+              <span class="checkbox">
+                <input type="checkbox" id="check" />
+                <label for="check">Remember me</label>
+              </span>
+              <a href="#" class="forgot_pw">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="button">Login Now</button>
+          </form>
+        </div>
+      </div></div>
+    </section>
+     <!--footer-->
+     <footer id="footer">
+      <h2>Copyright @ Digital Kidu all rights reserved</h2>
+    </footer>
+
+    <script src="script/index.js"></script>
+  </body>
+</html>

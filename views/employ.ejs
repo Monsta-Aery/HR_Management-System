@@ -1,0 +1,245 @@
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DK HR Management System</title>
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <% if (eid && eid.length > 0) { %>
+  <div class="alert alert-danger text-center" role="alert" id="eid-error" style="color: red;">
+    <%= eid %>
+  </div>
+  <script>
+    setTimeout(function() {
+      var eid = document.getElementById('eid-error');
+      eid.style.display = 'none';
+    }, 5000); // hide the error after 5 seconds (5000 milliseconds)
+  </script>
+  <style>
+    #eid-error {
+      position: fixed;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+  </style>
+<% } %>
+
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container cont">
+          <input type="checkbox" name="" id="">
+          <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+          </div>
+          <ul class="menu-items">
+              <li><a href="employlist"><i class="fas fa-user"></i>&nbsp;&nbsp;Employee List</a></li>
+              <li><a href="employ"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add Employee</a></li>
+              <li><a href="/api/v1/login/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a></li>
+          </ul>
+          <div class="log">
+          <h2 class="logo">DK</h2></div>
+      </div>
+  </nav>
+  <section class="home">
+    <!--hero banner animation-->
+
+        <div class="wrapper">
+            <h1>First Digital Bank<br>
+            In Bhutan</h1>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <!--hero banner animation end-->
+            </div>
+  </section>
+
+  <!--registration-->
+
+  <section class="container">
+    <header>Registration Form</header>
+    <form action="/api/v1/employ" method="post" class="form" id="myForm">
+        <div class="input-box">
+          <label>Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter Your Name" />
+          <span id="nameError" class="error"></span>
+        </div>
+
+        <div class="input-box">
+          <label>Employee ID</label>
+          <input type="text" id="employeeID" name="eid" placeholder="Enter Employee ID" />
+          <span id="employeeIDError" class="error"></span>
+        </div>
+
+        <div class="gender-box">
+          <h3>Gender</h3>
+          <div class="gender-option">
+            <div class="gender">
+              <input type="radio" id="check-male" name="gender" checked />
+              <label for="check-male">male</label>
+            </div>
+            <div class="gender">
+              <input type="radio" id="check-female" name="gender" />
+              <label for="check-female">Female</label>
+            </div>
+            <div class="gender">
+              <input type="radio" id="check-other" name="gender" />
+              <label for="check-other">prefer not to say</label>
+            </div>
+          </div>
+          <span id="genderError" class="error"></span>
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Birth Date</label>
+            <input type="date" id="birthDate" name="date" placeholder="Enter Birth Date" />
+            <span id="birthDateError" class="error"></span>
+          </div>
+          <div class="input-box">
+            <label>Designation</label>
+            <input type="text" id="designation" name="designation" placeholder="Enter Your Designation" />
+            <span id="designationError" class="error"></span>
+          </div>
+        </div>
+
+        <div class="input-box address">
+          <div class="column">
+            <div class="input-box">
+              <label>Department</label>
+              <div class="select-box">
+                <select id="department" name="department">
+                  <option hidden>Choose Your Department</option>
+                  <option>IT</option>
+                  <option>HR</option>
+                  <option>Manager</option>
+                  <option>CEO</option>
+                </select>
+              </div>
+              <span id="departmentError" class="error"></span>
+            </div>
+            <div class="input-box">
+              <label>Appointment Date</label>
+              <input type="date" id="appointmentDate" name="appointmentdate" placeholder="Enter Appointment Date" />
+              <span id="appointmentDateError" class="error"></span>
+            </div>
+          </div>
+        </div>
+        <button onclick="validateForm()">Submit</button>
+      </form>
+      <script>
+
+      function validateForm(event) {
+    event.preventDefault(); // Prevent the form from submitting by default
+
+    // Clear all previous error messages
+    clearErrors();
+
+    // Get form inputs
+    var name = document.getElementById("name").value;
+    var employeeID = document.getElementById("employeeID").value;
+    var gender = document.querySelector('input[name="gender"]:checked');
+    var birthDate = document.getElementById("birthDate").value;
+    var designation = document.getElementById("designation").value;
+    var department = document.getElementById("department").value;
+    var appointmentDate = document.getElementById("appointmentDate").value;
+
+    // Flag to track if there are any validation errors
+    var hasErrors = false;
+
+    // Validate Name
+    if (name.trim() === "") {
+      document.getElementById("nameError").textContent = "Please enter your name.";
+      hasErrors = true;
+    }
+
+    // Validate Employee ID
+    if (employeeID.trim() === "") {
+      document.getElementById("employeeIDError").textContent = "Please enter your Employee ID.";
+      hasErrors = true;
+    } else if (!/^\d+$/.test(employeeID)) {
+      document.getElementById("employeeIDError").textContent = "Employee ID must be a number.";
+      hasErrors = true;
+    }
+
+    // Validate Gender
+    if (gender === null) {
+      document.getElementById("genderError").textContent = "Please select your gender.";
+      hasErrors = true;
+    }
+
+    // Validate Birth Date
+    if (birthDate.trim() === "") {
+      document.getElementById("birthDateError").textContent = "Please enter your birth date.";
+      hasErrors = true;
+    }
+
+    // Validate Designation
+    if (designation.trim() === "") {
+      document.getElementById("designationError").textContent = "Please enter your designation.";
+      hasErrors = true;
+    }
+
+    // Validate Department
+    if (department.trim() === "") {
+      document.getElementById("departmentError").textContent = "Please choose your department.";
+      hasErrors = true;
+    }
+
+    // Validate Appointment Date
+    if (appointmentDate.trim() === "") {
+      document.getElementById("appointmentDateError").textContent = "Please enter your appointment date.";
+      hasErrors = true;
+    }
+
+    // If there are no errors, submit the form
+    if (!hasErrors) {
+      document.getElementById("myForm").submit();
+    } else {
+      // Scroll to the top of the form to show the error messages
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+
+</script>
+      <style>
+        .error {
+          display: block;
+          color: red;
+          margin-top: 5px;
+        }
+      </style>
+
+  </section>
+
+  <!--footer-->
+    <footer id="footer">
+      <h2>Copyright @ Mon Aley all rights reserved</h2>
+    </footer>
+    <script src="script/validate.js"></script>
+  </body>
+
+  </script>
+</html>
