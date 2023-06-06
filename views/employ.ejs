@@ -1,0 +1,164 @@
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DK HR Management System</title>
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <% if (eid && eid.length > 0) { %>
+  <div class="alert alert-danger text-center" role="alert" id="eid-error" style="color: red;">
+    <%= eid %>
+  </div>
+  <script>
+    setTimeout(function() {
+      var eid = document.getElementById('eid-error');
+      eid.style.display = 'none';
+    }, 5000); // hide the error after 5 seconds (5000 milliseconds)
+  </script>
+  <style>
+    #eid-error {
+      position: fixed;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+  </style>
+<% } %>
+
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container cont">
+          <input type="checkbox" name="" id="">
+          <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+          </div>
+          <ul class="menu-items">
+              <li><a href="employlist"><i class="fas fa-user"></i>&nbsp;&nbsp;Employee List</a></li>
+              <li><a href="employ"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add Employee</a></li>
+              <li><a href="/api/v1/login/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a></li>
+          </ul>
+          <div class="log">
+          <h2 class="logo">DK</h2></div>
+      </div>
+  </nav>
+  <section class="home">
+    <!--hero banner animation-->
+
+        <div class="wrapper">
+            <h1>First Digital Bank<br>
+            In Bhutan</h1>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <!--hero banner animation end-->
+            </div>
+  </section>
+
+  <!--registration-->
+
+  <section class="container">
+    <header>Registration Form</header>
+    <form action="/api/v1/employ" method="post" class="form" id="myForm" name="myForm">
+  <div class="input-box">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter Your Name" />
+    <span id="nameError" class="error"></span>
+  </div>
+
+  <div class="input-box">
+    <label for="employeeID">Employee ID</label>
+    <input type="text" id="employeeID" name="eid" placeholder="Enter Employee ID" />
+    <span id="employeeIDError" class="error"></span>
+  </div>
+
+  <div class="gender-box">
+  <h3>Gender</h3>
+  <div class="gender-option">
+    <div class="gender">
+      <input type="radio" id="check-male" name="gender" value="male" checked />
+      <label for="check-male">Male</label>
+    </div>
+    <div class="gender">
+      <input type="radio" id="check-female" name="gender" value="female" />
+      <label for="check-female">Female</label>
+    </div>
+    <div class="gender">
+      <input type="radio" id="check-other" name="gender" value="other" />
+      <label for="check-other">Other</label>
+    </div>
+  </div>
+  <span id="genderError" class="error"></span>
+</div>
+
+
+  <div class="column">
+    <div class="input-box">
+      <label for="birthDate">Birth Date</label>
+      <input type="date" id="birthDate" name="date" placeholder="Enter Birth Date" />
+      <span id="birthDateError" class="error"></span>
+    </div>
+    <div class="input-box">
+      <label for="designation">Designation</label>
+      <input type="text" id="designation" name="designation" placeholder="Enter Your Designation" />
+      <span id="designationError" class="error"></span>
+    </div>
+  </div>
+
+  <div class="input-box address">
+    <div class="column">
+      <div class="input-box">
+        <label for="department">Department</label>
+        <div class="select-box">
+          <select id="department" name="department">
+            <option hidden>Choose Your Department</option>
+            <option>IT</option>
+            <option>HR</option>
+            <option>Manager</option>
+            <option>CEO</option>
+          </select>
+        </div>
+        <span id="departmentError" class="error"></span>
+      </div>
+      <div class="input-box">
+        <label for="appointmentDate">Appointment Date</label>
+        <input type="date" id="appointmentDate" name="appointmentdate" placeholder="Enter Appointment Date" />
+        <span id="appointmentDateError" class="error"></span>
+      </div>
+    </div>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+
+
+  </section>
+
+  <!--footer-->
+    <footer id="footer">
+      <h2>Copyright @ Mon Aley all rights reserved</h2>
+    </footer>
+    <script src="/script/validate.js"></script>
+  </body>
+
+  </script>
+</html>
